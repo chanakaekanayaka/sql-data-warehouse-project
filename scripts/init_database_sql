@@ -1,0 +1,45 @@
+/*
+-----------------------------------------------------------------------------------------------
+Project: SQL Data Warehouse Implementation
+Script: 01_Database_Setup.sql
+Description: Initial setup script to create the 'DataWarehouse' database and establish 
+             the Medallion Architecture layers (Bronze, Silver, Gold).
+             - Bronze: Raw data ingestion
+             - Silver: Cleansed and transformed data
+             - Gold: Business-ready curated data 
+Author: Chanaka Ekanayaka
+Date: April 2026
+-----------------------------------------------------------------------------------------------
+*/
+
+
+
+USE master;
+
+--Drop and recreate the 'DataWarehouse' database
+IF EXIST(SELECT 1 FROM sys.databases WHERE name ='DataWarehouse')
+BEGIN
+	ALTER DATABASE DataWarehouse SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
+	DROP DATABASE DataWarehouse;
+END;
+GO
+
+
+--create the 'DataWarehouse' database
+CREATE DATABASE DataWarehouse;
+
+GO
+
+
+USE DataWarehouse;
+
+
+--Create Schemas
+CREATE SCHEMA bronze;
+GO
+
+CREATE SCHEMA silver;
+GO
+
+CREATE SCHEMA gold;
+GO
